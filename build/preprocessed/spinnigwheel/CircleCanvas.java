@@ -94,19 +94,30 @@ import javax.microedition.lcdui.Graphics;
   {
     if(key== KEY_NUM8)
     {
-       rNext = rNext + 5;
+        if(rNext + 5 <80)
+        {
+            rNext = rNext + 5;
        gNext = gNext + 5;
        bNext = bNext + 5;
        repaint(); 
+        }
+       
     }
      else if(key== KEY_NUM2)
     {
-        if(rNext>0)
+        if(rNext- 5>=0)
         {
             rNext = rNext - 5;
             gNext = gNext - 5;
             bNext = bNext - 5;
             repaint();
+        }
+        else
+        {
+            System.out.println(rCurr);
+            System.out.println(gCurr);
+            System.out.println(bCurr);
+            
         }
         
     }
@@ -127,8 +138,8 @@ import javax.microedition.lcdui.Graphics;
         this.finalPointerX = x;
         this.finalPointerY = y;
         this.difference = this.finalPointerX - this.initialPointerX;
-        System.out.println( difference);
-        if(rNext>0)
+       // System.out.println( difference);
+        if(rNext + this.difference >= 0 && rNext + this.difference <= 80)
         {
             rNext = rNext + this.difference;
         gNext = gNext + this.difference;

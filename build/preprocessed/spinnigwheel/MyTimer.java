@@ -28,7 +28,7 @@ public class MyTimer extends TimerTask  {
        
        
     canvas.rCurr = (canvas.rCurr - canvas.rNext)%360;
-    canvas.gCurr =  (canvas.gCurr-canvas.gNext)%360;
+    canvas.gCurr =  (canvas.gCurr -canvas.gNext)%360;
     canvas.bCurr = (canvas.bCurr -canvas.bNext)%360;
     
     canvas.repaint();        }
