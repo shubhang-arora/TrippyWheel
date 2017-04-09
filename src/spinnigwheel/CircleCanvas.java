@@ -35,39 +35,41 @@ import javax.microedition.lcdui.Graphics;
   int rNext = 5;
   int gNext = 5;
   int bNext = 5;
-  int k  = 0;
+  int initialPointerX;
+  int initialPointerY;
+  int finalPointerX;
+  int finalPointerY;
+  int difference;
 
 
 
     CircleCanvas(Midlet aThis) {
         this.seconds = seconds;
-  startTime = System.currentTimeMillis();
-       this.midlet = midlet;
+        startTime = System.currentTimeMillis();
+        this.midlet = midlet;
     
-    commandExit = new Command("Exit", Command.EXIT, 1);
+        commandExit = new Command("Exit", Command.EXIT, 1);
  
-    keyUp = getKeyCode(UP);
-    keyDown = getKeyCode(DOWN);
+        keyUp = getKeyCode(UP);
+        keyDown = getKeyCode(DOWN);
    
-    addCommand(commandExit);
-    setCommandListener(this); }
+        addCommand(commandExit);
+        setCommandListener(this); }
 
     
 
   public void paint(Graphics g){
-  g.setColor(0, 0, 0);
-  g.fillRect(0, 0, getWidth(), getHeight());
+        g.setColor(0, 0, 0);
+        g.fillRect(0, 0, getWidth(), getHeight());
 
-  g.setColor(255, 0, 0);
-  g.fillArc(15,15, 200, 200, rCurr, degree);
+        g.setColor(255, 0, 0);
+        g.fillArc(15,15, 200, 200, rCurr, degree);
   
-  g.setColor(255, 0, 0);
-  g.drawArc(15, 15, 200, 200, rCurr, 120);
+        g.setColor(255, 0, 0);
+        g.drawArc(15, 15, 200, 200, rCurr, 120);
   
-  
-
-  g.setColor(0, 255, 0);
-  g.fillArc(15,15, 200, 200, gCurr, degree);
+        g.setColor(0, 255, 0);
+        g.fillArc(15,15, 200, 200, gCurr, degree);
   
   g.setColor(0, 255, 0);
   g.drawArc(15, 15, 200, 200, gCurr, 120);
@@ -95,25 +97,50 @@ import javax.microedition.lcdui.Graphics;
        rNext = rNext + 5;
        gNext = gNext + 5;
        bNext = bNext + 5;
-        repaint();
-        
+       repaint(); 
     }
      else if(key== KEY_NUM2)
     {
-       rNext = rNext - 5;
-       gNext = gNext - 5;
-       bNext = bNext - 5;
-        repaint();
+        if(rNext>0)
+        {
+            rNext = rNext - 5;
+            gNext = gNext - 5;
+            bNext = bNext - 5;
+            repaint();
+        }
         
     }
-     
     else if(key==KEY_NUM5)
     {
         rNext = rNext + 5;
-       gNext = gNext + 5;
-       bNext = bNext + 5;
+        gNext = gNext + 5;
+        bNext = bNext + 5;
+    }   
+  }
+    protected void pointerPressed(int x, int y){
+        this.initialPointerX = x;
+        this.initialPointerY = y;
+    }
+    
+    protected void pointerDragged(int x, int y){
+        
+        this.finalPointerX = x;
+        this.finalPointerY = y;
+        this.difference = this.finalPointerX - this.initialPointerX;
+        System.out.println( difference);
+        if(rNext>0)
+        {
+            rNext = rNext + this.difference;
+        gNext = gNext + this.difference;
+        bNext = bNext + this.difference;
+        repaint();
+        }
+        
         
     }
+    
+    protected void pointerReleased(int x, int y){
      
-  }
+    }
+    
  }

@@ -26,24 +26,10 @@ public class MyTimer extends TimerTask  {
  
     public void run() {
        
-        if ((canvas.rCurr - canvas.rNext < 0) )      
-    {          
-        canvas.rCurr = 360;
-        
-    }
-        if ((canvas.gCurr - canvas.gNext < 0) )      
-    {          
-        canvas.gCurr = 360;
-        
-    }
-        if ((canvas.bCurr - canvas.bNext  < 0) )      
-    {          
-        canvas.bCurr = 360;
-        
-    }
-    canvas.rCurr -= canvas.rNext;
-    canvas.gCurr -= canvas.gNext;
-    canvas.bCurr -= canvas.bNext;
+       
+    canvas.rCurr = (canvas.rCurr - canvas.rNext)%360;
+    canvas.gCurr =  (canvas.gCurr-canvas.gNext)%360;
+    canvas.bCurr = (canvas.bCurr -canvas.bNext)%360;
     
     canvas.repaint();        }
 
