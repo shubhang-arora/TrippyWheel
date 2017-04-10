@@ -1,4 +1,4 @@
-MIDlet-1: Midlet, , spinnigwheel.Midlet
+MIDlet-1: Midlet, ,RGB_WHEEL.Midlet
 MIDlet-Vendor: Vendor
 MIDlet-Version: 1.0
 MIDlet-Name: SpinnigWheel

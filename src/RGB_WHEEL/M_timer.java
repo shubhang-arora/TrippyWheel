@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package spinnigwheel;
+package RGB_WHEEL;
 
 /**
  *
@@ -15,11 +15,11 @@ import java.util.*;
 
 
 
-public class MyTimer extends TimerTask  {
+public class M_timer extends TimerTask  {
 
-    private CircleCanvas canvas;
+    private CCANVAS canvas;
     
-    public MyTimer(CircleCanvas canvas)
+    public M_timer(CCANVAS canvas)
   {
     this.canvas = canvas;
   }

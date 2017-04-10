@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package spinnigwheel;
+package RGB_WHEEL;
 
 import javax.microedition.lcdui.Canvas;
 import javax.microedition.lcdui.Command;
@@ -19,13 +19,13 @@ import javax.microedition.lcdui.Graphics;
  *
  * @author Shubhang
  */
-  class CircleCanvas extends Canvas implements CommandListener{
+  class CCANVAS extends Canvas implements CommandListener{
   int degree = 120;
   long startTime;
   int seconds;
   Display display;
   private Midlet midlet;  
-  private Command commandExit;
+  private Command exit;
   private int keyUp, keyDown; 
   
   int speedChange = 300;
@@ -43,17 +43,17 @@ import javax.microedition.lcdui.Graphics;
 
 
 
-    CircleCanvas(Midlet aThis) {
+    CCANVAS(Midlet aThis) {
         this.seconds = seconds;
         startTime = System.currentTimeMillis();
         this.midlet = midlet;
     
-        commandExit = new Command("Exit", Command.EXIT, 1);
+        exit = new Command("Exit", Command.EXIT, 1);
  
         keyUp = getKeyCode(UP);
         keyDown = getKeyCode(DOWN);
    
-        addCommand(commandExit);
+        addCommand(exit);
         setCommandListener(this); }
 
     
@@ -63,29 +63,29 @@ import javax.microedition.lcdui.Graphics;
         g.fillRect(0, 0, getWidth(), getHeight());
 
         g.setColor(255, 0, 0);
-        g.fillArc(15,15, 200, 200, rCurr, degree);
+        g.fillArc(getWidth()/2-100, getHeight()/2-100, 200, 200, rCurr, degree);
   
         g.setColor(255, 0, 0);
-        g.drawArc(15, 15, 200, 200, rCurr, 120);
+        g.drawArc(getWidth()/2-100, getHeight()/2-100, 200, 200, rCurr, 120);
   
         g.setColor(0, 255, 0);
-        g.fillArc(15,15, 200, 200, gCurr, degree);
+        g.fillArc(getWidth()/2-100, getHeight()/2-100, 200, 200, gCurr, degree);
   
   g.setColor(0, 255, 0);
-  g.drawArc(15, 15, 200, 200, gCurr, 120);
+  g.drawArc(getWidth()/2-100, getHeight()/2-100, 200, 200, gCurr, 120);
   
   
   g.setColor(0, 0, 255);
-  g.fillArc(15,15, 200, 200, bCurr, degree);
+  g.fillArc(getWidth()/2-100, getHeight()/2-100, 200, 200, bCurr, degree);
   
   g.setColor(0, 0, 255);
-  g.drawArc(15, 15, 200, 200, bCurr, 120);
+  g.drawArc(getWidth()/2-100, getHeight()/2-100, 200, 200, bCurr, 120);
   
   
   }
 
     public void commandAction(Command c, Displayable dsplbl) {
-    if (c == commandExit)
+    if (c == exit)
       midlet.exitMIDlet();   
     }
     
@@ -95,7 +95,7 @@ import javax.microedition.lcdui.Graphics;
     if(key== -1)
     {
        
-        if(rNext + 5 <this.getWidth())
+        if(rNext + 5 < this.getWidth())
         {
             rNext = rNext + 5;
        gNext = gNext + 5;
@@ -136,23 +136,43 @@ import javax.microedition.lcdui.Graphics;
     
     protected void pointerDragged(int x, int y){
         
-        this.finalPointerX = x;
-        this.finalPointerY = y;
-        this.difference = this.finalPointerX - this.initialPointerX;
-       // System.out.println( difference);
-        if(rNext + this.difference >= 0 && rNext + this.difference <= this.getWidth())
-        {
-            rNext = rNext + this.difference;
-        gNext = gNext + this.difference;
-        bNext = bNext + this.difference;
-        repaint();
-        }
+        
         
         
     }
     
     protected void pointerReleased(int x, int y){
-     
+        this.finalPointerX = x;
+        this.finalPointerY = y;
+        this.difference = this.finalPointerX - this.initialPointerX;
+        if(this.difference >= 0)
+        {
+            if(rNext + this.difference >= 0 && rNext + this.difference <= this.getWidth())
+            {
+                rNext = rNext + this.difference;
+                gNext = gNext + this.difference;
+                bNext = bNext + this.difference;
+                repaint();
+            }
+        }
+        else
+        {
+            if(rNext + this.difference >= 0 && rNext + this.difference <= this.getWidth())
+            {
+                rNext = rNext + this.difference;
+                gNext = gNext + this.difference;
+                bNext = bNext + this.difference;
+                repaint();
+            }
+            else
+            {
+                rNext = 0;
+                gNext = 0;
+                bNext = 0;
+                repaint();
+            }
+              
+        }
     }
     
  }

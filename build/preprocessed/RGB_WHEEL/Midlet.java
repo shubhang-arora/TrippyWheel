@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package spinnigwheel;
+package RGB_WHEEL;
 
 
 
@@ -20,16 +20,16 @@ import java.util.Timer;
 public class Midlet extends MIDlet{
   
     private Display  myDisplay;  
-    private CircleCanvas c1;
+    private CCANVAS c1;
     Timer time;              
-   MyTimer timerTask; 
+   M_timer timerTask; 
     public Midlet()
   {
     myDisplay = Display.getDisplay(this);
-    c1  = new CircleCanvas( this);
+    c1  = new CCANVAS( this);
  
    time = new Timer();
-   timerTask = new MyTimer(c1);
+   timerTask = new M_timer(c1);
     time.schedule(timerTask,0,50);   
   
   }
@@ -39,11 +39,16 @@ public class Midlet extends MIDlet{
 
   public void pauseApp(){}
 
-  public void destroyApp(boolean unconditional){}
-  
-  public void exitMIDlet()
+  public void destroyApp(boolean unconditional){
+  notifyDestroyed();
+  }
+
+    /**
+     *
+     */
+    public void exitMIDlet()
   {
-    destroyApp(true);
-    notifyDestroyed();
+    destroyApp(false);
+    
   }
 }
