@@ -32,9 +32,9 @@ import javax.microedition.lcdui.Graphics;
   int rCurr = 0;
   int gCurr = 120;
   int bCurr = 240;
-  int rNext = 5;
-  int gNext = 5;
-  int bNext = 5;
+  int rNext = 0;
+  int gNext = 0;
+  int bNext = 0;
   int initialPointerX;
   int initialPointerY;
   int finalPointerX;
@@ -92,9 +92,10 @@ import javax.microedition.lcdui.Graphics;
     
     protected void keyPressed(int key)
   {
-    if(key== KEY_NUM8)
+    if(key== -1)
     {
-        if(rNext + 5 <80)
+       
+        if(rNext + 5 <this.getWidth())
         {
             rNext = rNext + 5;
        gNext = gNext + 5;
@@ -103,7 +104,7 @@ import javax.microedition.lcdui.Graphics;
         }
        
     }
-     else if(key== KEY_NUM2)
+     else if(key== -2)
     {
         if(rNext- 5>=0)
         {
@@ -114,9 +115,9 @@ import javax.microedition.lcdui.Graphics;
         }
         else
         {
-            System.out.println(rCurr);
-            System.out.println(gCurr);
-            System.out.println(bCurr);
+            rNext =  0;
+           gNext = 0;
+            bNext = 0;
             
         }
         
@@ -139,7 +140,7 @@ import javax.microedition.lcdui.Graphics;
         this.finalPointerY = y;
         this.difference = this.finalPointerX - this.initialPointerX;
        // System.out.println( difference);
-        if(rNext + this.difference >= 0 && rNext + this.difference <= 80)
+        if(rNext + this.difference >= 0 && rNext + this.difference <= this.getWidth())
         {
             rNext = rNext + this.difference;
         gNext = gNext + this.difference;
