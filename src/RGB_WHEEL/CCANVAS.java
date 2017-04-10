@@ -63,44 +63,46 @@ import javax.microedition.lcdui.Graphics;
         g.fillRect(0, 0, getWidth(), getHeight());
 
         g.setColor(255, 0, 0);
-        g.fillArc(getWidth()/2-100, getHeight()/2-100, 200, 200, rCurr, degree);
+        g.fillArc(15,15, 200, 200, rCurr, degree);
   
         g.setColor(255, 0, 0);
-        g.drawArc(getWidth()/2-100, getHeight()/2-100, 200, 200, rCurr, 120);
+        g.drawArc(15, 15, 200, 200, rCurr, 120);
   
         g.setColor(0, 255, 0);
-        g.fillArc(getWidth()/2-100, getHeight()/2-100, 200, 200, gCurr, degree);
+        g.fillArc(15,15, 200, 200, gCurr, degree);
   
   g.setColor(0, 255, 0);
-  g.drawArc(getWidth()/2-100, getHeight()/2-100, 200, 200, gCurr, 120);
+  g.drawArc(15, 15, 200, 200, gCurr, 120);
   
   
   g.setColor(0, 0, 255);
-  g.fillArc(getWidth()/2-100, getHeight()/2-100, 200, 200, bCurr, degree);
+  g.fillArc(15,15, 200, 200, bCurr, degree);
   
   g.setColor(0, 0, 255);
-  g.drawArc(getWidth()/2-100, getHeight()/2-100, 200, 200, bCurr, 120);
+  g.drawArc(15, 15, 200, 200, bCurr, 120);
   
   
   }
 
     public void commandAction(Command c, Displayable dsplbl) {
-    if (c == exit)
-      midlet.exitMIDlet();   
+        if (c == exit){
+            midlet.exitMIDlet();   
+        }
+       
     }
     
     
     protected void keyPressed(int key)
   {
-    if(key== -1)
+    if(key == -1)
     {
        
         if(rNext + 5 < this.getWidth())
         {
             rNext = rNext + 5;
-       gNext = gNext + 5;
-       bNext = bNext + 5;
-       repaint(); 
+            gNext = gNext + 5;
+            bNext = bNext + 5;
+            repaint(); 
         }
        
     }
@@ -116,7 +118,7 @@ import javax.microedition.lcdui.Graphics;
         else
         {
             rNext =  0;
-           gNext = 0;
+            gNext = 0;
             bNext = 0;
             
         }
@@ -136,43 +138,23 @@ import javax.microedition.lcdui.Graphics;
     
     protected void pointerDragged(int x, int y){
         
-        
+        this.finalPointerX = x;
+        this.finalPointerY = y;
+        this.difference = this.finalPointerX - this.initialPointerX;
+       // System.out.println( difference);
+        if(rNext + this.difference >= 0 && rNext + this.difference <= this.getWidth())
+        {
+            rNext = rNext + this.difference;
+            gNext = gNext + this.difference;
+            bNext = bNext + this.difference;
+            repaint();
+        }
         
         
     }
     
     protected void pointerReleased(int x, int y){
-        this.finalPointerX = x;
-        this.finalPointerY = y;
-        this.difference = this.finalPointerX - this.initialPointerX;
-        if(this.difference >= 0)
-        {
-            if(rNext + this.difference >= 0 && rNext + this.difference <= this.getWidth())
-            {
-                rNext = rNext + this.difference;
-                gNext = gNext + this.difference;
-                bNext = bNext + this.difference;
-                repaint();
-            }
-        }
-        else
-        {
-            if(rNext + this.difference >= 0 && rNext + this.difference <= this.getWidth())
-            {
-                rNext = rNext + this.difference;
-                gNext = gNext + this.difference;
-                bNext = bNext + this.difference;
-                repaint();
-            }
-            else
-            {
-                rNext = 0;
-                gNext = 0;
-                bNext = 0;
-                repaint();
-            }
-              
-        }
+     
     }
     
  }

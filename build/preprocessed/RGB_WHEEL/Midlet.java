@@ -48,7 +48,7 @@ public class Midlet extends MIDlet{
      */
     public void exitMIDlet()
   {
-    destroyApp(false);
+    destroyApp(true);
     
   }
 }
